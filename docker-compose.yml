@@ -1,0 +1,17 @@
+# docker run --rm -v "$PWD":/usr/src/myapp -w /usr/src/myapp openjdk:7 javac Main.java
+# java -Xmx1024M -Xms1024M -jar minecraft_server.1.15.2.jar nogui
+version: '3'
+
+services:
+  minecraft:
+    container_name: mc
+    image: openjdk
+    ports:
+      - "9000:25565"
+    environment:
+      - ENV_VAR=value
+    volumes:
+       - ./srv:/usr/src/myapp
+    working_dir: /usr/src/myapp
+    entrypoint: java
+    command: -Xmx1024M -jar server.jar nogui
